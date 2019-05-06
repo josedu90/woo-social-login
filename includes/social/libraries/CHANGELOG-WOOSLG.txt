@@ -1,0 +1,23 @@
+===== 1) File name: Facebook/PersistentData/FacebookSessionPersistentDataHandler.php
+
+-- functions get() change storage method session to cookie
+
+  -- old code 
+  if (isset($_SESSION[$this->sessionPrefix . $key])) {
+	return $_SESSION[$this->sessionPrefix . $key];
+  }
+
+  -- new code
+	if ( isset( $_COOKIE[$this->sessionPrefix . $key] )  ) { // added by wpweb
+		return $_COOKIE[$this->sessionPrefix . $key]; // added by wpweb
+    }
+
+-- functions set() change storage method session to cookie
+
+  -- old code 
+    $_SESSION[$this->sessionPrefix . $key] = $value;
+
+  -- new code
+  	setcookie( $this->sessionPrefix . $key, $value);
+
+
